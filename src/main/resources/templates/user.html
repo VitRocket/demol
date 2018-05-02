@@ -1,23 +1,28 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>DemoL</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-</head>
+<!DOCTYPE html>
+<html lang="en" class="full-height" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/head :: head"></head>
 <body>
-<h1>User List</h1>
-<br/><br/>
-<div>
-    <table border="1">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-        </tr>
-        <tr th:each="user : ${users}">
-            <td th:utext="${user.id}">...</td>
-            <td th:utext="${user.name}">...</td>
-        </tr>
-    </table>
+<nav th:include="fragments/navbar :: nav" class="navbar navbar-expand-sm bg-dark navbar-dark"></nav>
+
+<div class="container-fluid">
+    <h3>User List</h3>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:utext="${user.id}">...</td>
+                <td th:utext="${user.name}">...</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+
 </body>
 </html>
