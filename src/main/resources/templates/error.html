@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" class="full-height" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/head :: head"></head>
+<body>
+<nav th:include="fragments/navbar :: nav" class="navbar navbar-expand-sm bg-dark navbar-dark"></nav>
+
+<div class="container-fluid">
+    <h3>Error</h3>
+    <table class="table">
+        <tr>
+            <td>Date</td>
+            <td th:text="${timestamp}"/>
+        </tr>
+        <tr>
+            <td>Path</td>
+            <td th:text="${path}"/>
+        </tr>
+        <tr>
+            <td>Error</td>
+            <td th:text="${error}"/>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td th:text="${status}"/>
+        </tr>
+        <tr>
+            <td>Message</td>
+            <td th:text="${message}"/>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

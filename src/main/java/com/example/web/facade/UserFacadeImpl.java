@@ -2,6 +2,7 @@ package com.example.web.facade;
 
 import com.example.model.User;
 import com.example.service.UserService;
+import com.example.service.UserServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,10 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public List<User> getAllUsers() {
-        return userService.getAllUsers();
+        try {
+            return userService.getAllUsers();
+        } catch (UserServiceException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

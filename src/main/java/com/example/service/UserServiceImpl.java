@@ -2,27 +2,34 @@ package com.example.service;
 
 import com.example.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.URL;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Override
-    public List<User> getAllUsers() {
-        List<User> userList = new ArrayList<>();
+    public List<User> getAllUsers() throws UserServiceException {
+        List<User> userList;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            File file = new ClassPathResource("user.json").getFile();
-            userList = mapper.readValue(file, mapper.getTypeFactory().constructCollectionType(List.class, User.class));
+            FileInputStream stream = new FileInputStream(getPath());
+            userList = mapper.readValue(stream, mapper.getTypeFactory().constructCollectionType(List.class, User.class));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UserServiceException("data can not be read");
         }
         return userList;
+    }
+
+    private String getPath() throws UserServiceException {
+        URL url = ClassLoader.getSystemResource("user.json");
+        if (url == null) {
+            throw new UserServiceException("data can not be read");
+        }
+        return url.getPath();
     }
 }
