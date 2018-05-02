@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private String getPath() throws UserServiceException {
-        URL url = this.getClass().getClassLoader().getResource("user.json");
+        URL url = ClassLoader.getSystemResource("user.json");
         System.out.println(url);
         if (url == null) {
             throw new UserServiceException("data can not be read");
